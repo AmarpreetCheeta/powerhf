@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <link rel=”stylesheet” href=”https://use.fontawesome.com/releases/v5.7.0/css/all.css”
+        integrity=”sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ” crossorigin=”anonymous”>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <title>PowerHF • ATC Form</title>
+</head>
+
+<body>
+    <div id="loader" class="center"></div>
+    <div class="container-fluid p-0">
+        <div class="card border-0 bg-card">
+            <div class="row g-0">
+                <div class="col-md-2 card-2-side">
+                    <div class="sidebar sticky-top">
+                        <div class="sidebar-headers">
+                            <div class="inner-head text-center m-3 pb-4">
+                                <img src="{% static 'app/img/phf-logo.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="sidebar-second-tag">
+                            <div class="inner-bar-second-tag">
+                                <ul class="inner-bar-ul" style="margin-right: 1rem;">
+                                    <li class="inner-bar-li">
+                                        <a href="/" class="inner-a-atg">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                                style="margin-bottom: 5px;"
+                                                viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                <path
+                                                    d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+                                            </svg>
+                                            <span style="margin-left: 1rem;">Dashboard</span>
+                                        </a>
+                                    </li>
+                                    <li class="inner-bar-li">
+                                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                                            <div class="accordion-item" style="background-color: #f5f5f5;">
+                                                <button class="collapsed btn_col d-flex" type="button"
+                                                    id="btn-for-click" data-bs-toggle="collapse"
+                                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                                    aria-controls="flush-collapseOne" onclick="RotateArrow()">
+                                                    <div class="fefu">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                                            style="margin-bottom: 5px;" viewBox="0 0 512 512">
+                                                            <path
+                                                                d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <span style="margin-left: 1.3rem;">Reports</span>
+                                                    </div>
+                                                    <div class="df54r" id="down-id">
+                                                        <div id="to-arrow">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                                viewBox="0 0 448 512" class="svg-rote">
+                                                                <path
+                                                                    d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <div id="flush-collapseOne" class="accordion-collapse collapse mb-2 p-0"
+                                                    data-bs-parent="#accordionFlushExample" style="width: 90%;">
+                                                    <div class="accordion-body p-0 m-0 d-flex justify-content-end">
+                                                        <div class="hhuwe">
+                                                            <a href="{% url 'hoto_report' %}" class="inner_group-li">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                                    style="margin-bottom: 5px;"
+                                                                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                                    <path
+                                                                        d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                                                                </svg>
+                                                                <span class="report-dt">HOTO
+                                                                </span>
+                                                            </a>
+                                                            <a href="{% url 'atc_site_report' %}"
+                                                                class="inner_group-li">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                                    style="margin-bottom: 5px;"
+                                                                    viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                                    <path
+                                                                        d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                                                                </svg>
+                                                                <span class="report-dt">Energy Tracking</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="inner-bar-li">
+                                        <div class="accordion accordion-flush" id="formsaccordionFlushExample">
+                                            <div class="accordion-item" style="background-color: #f5f5f5;">
+                                                <button class="collapsed btn_col d-flex" id="btn-for-click"
+                                                    type="button" data-bs-toggle="collapse"
+                                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                                    aria-controls="panelsStayOpen-collapseOne">
+                                                    <div class="fefu">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                            style="margin-bottom: 5px;" viewBox="0 0 576 512">
+                                                            <path
+                                                                d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                                        </svg>
+                                                    </div>
+                                                    <div style="width: 100%;">
+                                                        <span style="margin-left: 1.3rem;">Forms</span>
+                                                    </div>
+                                                    <div class="df54r" id="down-id">
+                                                        <div id="to-arrow">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                                viewBox="0 0 448 512" class="svg-rote">
+                                                                <path
+                                                                    d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                                <div id="panelsStayOpen-collapseOne"
+                                                    class="accordion-collapse collapse show mb-2 p-0"
+                                                    data-bs-parent="#formsaccordionFlushExample" style="width: 90%;">
+                                                    <div class="accordion-body p-0 m-0 d-flex justify-content-end">
+                                                        <div class="hhuwe">
+                                                            <a href="{% url 'atcform' %}"
+                                                                class="inner_group-li code-famy">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="14"
+                                                                    style="margin-bottom: 3px;" width="14"
+                                                                    viewBox="0 0 576 512">
+                                                                    <path
+                                                                        d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                                                </svg>
+                                                                <span class="report-dt">DFR / Reading
+                                                                </span>
+                                                            </a>
+                                                            <a href="{% url 'fueldrawnform' %}" class="inner_group-li">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" height="14"
+                                                                    style="margin-bottom: 3px;" width="14"
+                                                                    viewBox="0 0 576 512">
+                                                                    <path
+                                                                        d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                                                </svg>
+                                                                <span class="report-dt">
+                                                                    Fuel Drawn
+                                                                </span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 inner-con-dt">
+                    <div class="container upper-body-tag p-0" style="width: 100%;">
+                        <div class="card border-0 top-card sticky-top">
+                            <div class="right-sidebar-upper">
+                                <div class="d-flex">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="group-dt first_show_top">
+                                                <span>
+                                                    <a href="/" style="text-decoration: none;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                            viewBox="0 0 576 512">
+                                                            <path
+                                                                d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+                                                        </svg>
+                                                    </a>
+                                                </span>
+                                                <span> / </span>
+                                                <span class="inner-top-link-atg">Forms</span>
+                                                <span> / </span>
+                                                <span class="inner-top-link-atg">DFR & Reading</span>
+                                            </div>
+                                            <div class="group-dt-2">
+                                                <button type="button" class="offconvas-btn" data-bs-toggle="offcanvas"
+                                                    data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-2">
+                                        {% if request.user.is_authenticated %}
+                                        <button onclick="myFunction()" class="user-link-dt dropbtn">
+                                            <svg height="1em" viewBox="0 0 448 512">
+                                                <path
+                                                    d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                            </svg>
+                                            {{request.user.first_name}} {{request.user.last_name}}
+                                        </button>
+                                        <div id="myDropdown" class="dropdown-content">
+                                            <div class="upp-dropdown-dt p-3">
+                                                <svg height="3em" viewBox="0 0 448 512">
+                                                    <path
+                                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
+                                                </svg><br>
+                                                <strong style="font-size: 12px;">{{request.user.first_name}}
+                                                    {{request.user.last_name}}</strong><br>
+                                                <span style="font-size: 13px;">{{request.user.department}}</span>
+                                            </div>
+                                            <div class="dropdown-linkdt">
+                                                <form action="{% url 'logout' %}" method="POST">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="border-top border-0 bg-white"
+                                                        style="width: 100%; padding: 10px;">
+                                                        <span>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                                viewBox="0 0 512 512">
+                                                                <path
+                                                                    d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
+                                                            </svg>
+                                                        </span>
+                                                        <span style="margin-left: 0.5rem;">Signout</span>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        {% else %}
+                                        <a href="{% url 'auth' %}" class="user-link-dt dropbtn text-decoration-none">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                                viewBox="0 0 512 512">
+                                                <path
+                                                    d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z" />
+                                            </svg>
+                                            Login
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card border-0 right-middel-card mt-4 mb-5">
+                            <div class="mt-4 mb-3">
+                                <div class="headings mb-4" style="padding-left: 15px;">
+                                    <h5 class="fw-normal">DFR / Energy Reading Form</h5>
+                                </div>
+                                {% if messages %}
+                                {% for msg in messages %}
+                                <div class="card {{msg.tags}} mb-5 p-2" id="Error-close"
+                                    style="margin-left: 0.8rem; margin-right: 1.5rem;">
+                                    <div class="d-flex">
+                                        <div class="inr-success-int1" style="width: 100%; padding-top: 4;">                                            
+                                            <span>{{msg}}</span>                                            
+                                        </div>
+                                        <div class="inr-success-int2">
+                                            <button class="btn-close-err-msg" id="btncloseerrmsg"
+                                                onclick="BtnErrorClose()">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                                                    viewBox="0 0 384 512" class="text-white">
+                                                    <path fill="#545454"
+                                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+                                <form action="" method="POST" class="m-3" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="erger-56ty">
+                                        <div class="row row-cols-1 row-cols-md-3 g-3 mb-5">
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label class="mb-2 label_input">Global ID <span
+                                                            class="text-danger fs-6">*</span></label><br>
+                                                    {{forms.global_id}}
+                                                </div>
+                                            </div>
+                                            <div class="col">
+                                                <div class="mb-3">
+                                                    <label class="mb-2 label_input">Coming for which purpose <span
+                                                            class="text-danger fs-6">*</span></label>
+                                                    {{forms.Tasks}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner-dtg54 mb-5">
+                                            <h6 style="margin-left: 10px;" class="mb-4">DG HMR, DG PIU</h6>
+                                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">DG Serial Number <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.DG_Serial_Number}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">DG HMR Status <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.DG_HMR_Status}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="HMR_Reading">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">DG HMR Reading</label>
+                                                        {{forms.DG_HMR_Reading}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">DG PIU Status <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.DG_PIU_Status}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="PIU_Reading">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Current DG PIU Reading</label>
+                                                        {{forms.Current_DG_PIU_Reading}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Diesel Filling Done <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.Diesel_Filling_Done}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Date
+                                                            <span class="text-danger fs-6">*</span>
+                                                        </label>
+                                                        {{forms.Date_Of_Diesel_Filling}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Diesel Balance Before
+                                                            Filling</label>
+                                                        {{forms.Diesel_Balance_Before_Filling}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="ForReadFill_Fuel_Qty_Filled">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Fuel Qty Filled</label>
+                                                        {{forms.Fuel_Qty_Filled}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="ForReadFill_Current_Diesel_Balance">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Current Diesel Balance</label>
+                                                        {{forms.Current_Diesel_Balance}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner-dtg54 mb-5">
+                                            <h6 style="margin-left: 10px;" class="mb-4">Measurement Photos</h6>
+                                            <div class="row row-cols-1 row-cols-md-2 g-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Before Fuel CM Photo</label>
+                                                        {{forms.Before_Fuel_CM_Photo}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="ForReadFill_After_Fuel_Filling_CM_Photo">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">After Fuel Filling CM
+                                                            Photo</label>
+                                                        {{forms.After_Fuel_Filling_CM_Photo}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner-dtg54 mb-5">
+                                            <h6 style="margin-left: 10px;" class="mb-4">EB & EB PIU</h6>
+                                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">EB Meter Status <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.EB_Meter_Status}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="EB_Reading">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Current EB MTR KWH</label>
+                                                        {{forms.Current_EB_MTR_KWH}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">EB PIU Meter Status <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.EB_PIU_Meter_Status}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="CRT_PIU_reading">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Current EB PIU Reading</label>
+                                                        {{forms.Current_EB_PIU_Reading}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="ForReadFill_Total_DC_Load">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Total DC Load</label>
+                                                        {{forms.Total_DC_Load}}
+                                                    </div>
+                                                </div>
+                                                <div class="col" id="ForReadFill_Total_EB_KWH_Reading_from_all_Channels">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Total EB KWH Reading From all
+                                                            Channels</label>
+                                                        {{forms.Total_EB_KWH_Reading_from_all_Channels}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Remarks</label>
+                                                        {{forms.Remarks}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="inner-dtg54">
+                                            <h6 style="margin-left: 10px;" class="mb-4">Technician Details and
+                                                Supporting Documents</h6>
+                                            <div class="row row-cols-1 row-cols-md-3 g-3">
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">FT ID <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.FT_ID}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">FT Name <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.FT_name}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">FT mobile Number <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.FT_mobile_no}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Receipt No <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.Receipt_No}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Card Number <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.Card_Number}}
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="mb-3">
+                                                        <label class="mb-2 label_input">Vehicle Plate <span
+                                                                class="text-danger fs-6">*</span></label>
+                                                        {{forms.Vehicle_Plate}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="button_for_form_filling mt-5 text-end mb-4" style="margin-right: 1rem;">
+                                        <button type="submit" class="btn-filling_data">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                    <div class="inner-head">
+                        <img src="{% static 'app/img/phf-logo.png' %}" alt="">
+                    </div>
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <div class="inner-bar-second-tag mt-4">
+                    <ul class="inner-bar-ul" style="margin-right: 2rem;">
+                        <li class="inner-bar-li">
+                            <a href="/" class="inner-a-atg">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" style="margin-bottom: 5px;"
+                                    viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                    <path
+                                        d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z" />
+                                </svg>
+                                <span style="margin-left: 1rem;">Dashboard</span>
+                            </a>
+                        </li>
+                        <li class="inner-bar-li">
+                            <div class="accordion accor-gt6 accordion-flush" id="accordionFlushExample">
+                                <div class="accordion-item" style="background-color: #fff;">
+                                    <button class="collapsed btn_col d-flex" type="button" id="btn-for-click"
+                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                        aria-expanded="false" aria-controls="flush-collapseOne" onclick="RotateArrow()">
+                                        <div class="fefu">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"
+                                                style="margin-bottom: 5px;">
+                                                <path
+                                                    d="M184 48H328c4.4 0 8 3.6 8 8V96H176V56c0-4.4 3.6-8 8-8zm-56 8V96H64C28.7 96 0 124.7 0 160v96H192 320 512V160c0-35.3-28.7-64-64-64H384V56c0-30.9-25.1-56-56-56H184c-30.9 0-56 25.1-56 56zM512 288H320v32c0 17.7-14.3 32-32 32H224c-17.7 0-32-14.3-32-32V288H0V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V288z" />
+                                            </svg>
+                                        </div>
+                                        <div style="width: 100%;">
+                                            <span style="margin-left: 1.3rem;">Reports</span>
+                                        </div>
+                                        <div class="df54r" id="down-id">
+                                            <div id="to-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                    style="margin-bottom: 5px;" viewBox="0 0 448 512" class="svg-rote">
+                                                    <path
+                                                        d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse mb-2 p-0"
+                                        data-bs-parent="#accordionFlushExample" style="width: 90%;">
+                                        <div class="accordion-body p-0 m-0 d-flex justify-content-end">
+                                            <div class="hhuwe">
+                                                <a href="{% url 'hoto_report' %}" class="inner_group-li">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                        style="margin-bottom: 5px;"
+                                                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                        <path
+                                                            d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                                                    </svg>
+                                                    <span class="report-dt">HOTO</span>
+                                                </a>
+                                                <a href="{% url 'atc_site_report' %}" class="inner_group-li">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                        style="margin-bottom: 5px;"
+                                                        viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                        <path
+                                                            d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM112 256H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64H272c8.8 0 16 7.2 16 16s-7.2 16-16 16H112c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                                                    </svg>
+                                                    <span class="report-dt">Energy</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="inner-bar-li">
+                            <div class="accordion accordion-flush" id="formsaccordionFlushExample">
+                                <div class="accordion-item" style="background-color: #fff;">
+                                    <button class="collapsed btn_col d-flex" id="btn-for-click" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
+                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        <div class="fefu">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16"
+                                                style="margin-bottom: 5px;" viewBox="0 0 576 512">
+                                                <path
+                                                    d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                            </svg>
+                                        </div>
+                                        <div style="width: 100%;">
+                                            <span style="margin-left: 1.3rem;">Forms</span>
+                                        </div>
+                                        <div class="df54r" id="down-id">
+                                            <div id="to-arrow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" height="0.875em"
+                                                    viewBox="0 0 448 512" class="svg-rote">
+                                                    <path
+                                                        d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </button>
+                                    <div id="panelsStayOpen-collapseOne"
+                                        class="accordion-collapse collapse show mb-2 p-0"
+                                        data-bs-parent="#formsaccordionFlushExample" style="width: 90%;">
+                                        <div class="accordion-body p-0 m-0 d-flex justify-content-end">
+                                            <div class="hhuwe">
+                                                <a href="{% url 'atcform' %}" class="inner_group-li code-famy">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="14" width="14"
+                                                        style="margin-bottom: 3px;" viewBox="0 0 576 512">
+                                                        <path
+                                                            d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                                    </svg>
+                                                    <span class="report-dt">DFR / Reading
+                                                    </span>
+                                                </a>
+                                                <a href="{% url 'fueldrawnform' %}" class="inner_group-li">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" height="14"
+                                                        style="margin-bottom: 3px;" width="14" viewBox="0 0 576 512">
+                                                        <path
+                                                            d="M0 96C0 60.7 28.7 32 64 32H512c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM128 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm32-128a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM128 384a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm96-248c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24H448c13.3 0 24-10.7 24-24s-10.7-24-24-24H224z" />
+                                                    </svg>
+                                                    <span class="report-dt">
+                                                        Fuel Drawn
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'app/js/style.js' %}"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // In your Javascript
+        $(document).ready(function () {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "body").style.visibility = "hidden";
+                document.querySelector(
+                    "#loader").style.visibility = "visible";
+            } else {
+                document.querySelector(
+                    "#loader").style.display = "none";
+                document.querySelector(
+                    "body").style.visibility = "visible";
+            }
+        };
+    </script>
+    <script>
+        $(function () {
+            // $(".amount").mask('#,###.##', {reverse : true});
+
+            var total_amount = function () {
+                var sum = 0;
+                $(".amount").each(function () {
+                    var num = $(this).val().replace(',');
+                    if (num !== 0) {
+                        sum += parseFloat(num);
+                    }
+                });
+                $("#total_amount").val(sum);
+            }
+
+            $(".amount").keyup(function () {
+                total_amount();
+            })
+        })
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#HMR_status").change(function () {
+                if ($(this).val() == "Working") {
+                    $("#HMR_Reading").show();
+                } else {
+                    $("#HMR_Reading").hide();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#status_PUI").change(function () {
+                if ($(this).val() == "Working") {
+                    $("#PIU_Reading").show();
+                } else {
+                    $("#PIU_Reading").hide();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#EBMeter_status").change(function () {
+                if ($(this).val() == "Working") {
+                    $("#EB_Reading").show();
+                } else {
+                    $("#EB_Reading").hide();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#EBPIU_Status").change(function () {
+                if ($(this).val() == "Working") {
+                    $("#CRT_PIU_reading").show();
+                } else {
+                    $("#CRT_PIU_reading").hide();
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#tasks_id").change(function () {
+                if ($(this).val() == "Energy Reading and Diesel Filling") {
+                    $("#ForReadFill_Fuel_Qty_Filled").show();
+                    $("#ForReadFill_Current_Diesel_Balance").show();
+                    $("#ForReadFill_After_Fuel_Filling_CM_Photo").show();
+                    $("#ForReadFill_Total_DC_Load").hide();
+                    $("#ForReadFill_Total_EB_KWH_Reading_from_all_Channels").hide();
+                }
+                else if ($(this).val() == "Energy Reading"){
+                    $("#ForReadFill_Fuel_Qty_Filled").hide();
+                    $("#ForReadFill_Current_Diesel_Balance").hide();
+                    $("#ForReadFill_After_Fuel_Filling_CM_Photo").hide();
+                    $("#ForReadFill_Total_DC_Load").show();
+                    $("#ForReadFill_Total_EB_KWH_Reading_from_all_Channels").show();
+                }
+                 else {
+                    $("#ForReadFill_Fuel_Qty_Filled").show();
+                    $("#ForReadFill_Current_Diesel_Balance").show();
+                    $("#ForReadFill_After_Fuel_Filling_CM_Photo").show();
+                    $("#ForReadFill_Total_DC_Load").show();
+                    $("#ForReadFill_Total_EB_KWH_Reading_from_all_Channels").show();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
