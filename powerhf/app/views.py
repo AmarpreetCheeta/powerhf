@@ -187,56 +187,67 @@ class DieselFillingOrReadingViews(TemplateView):
                 # This is DG_Running_HRS:
                 HMR_read = int(last_data_1.DG_HMR_Reading)
                 hmrread = int(DG_HMR_Reading)
+                dg_hr = 0
                 if hmrread < HMR_read:
                     if DG_HMR_Status == 'Working':
                         DG_HMR_Reading = form.cleaned_data['DG_HMR_Reading']
                     else:
                         DG_HMR_Reading = 0
+
+                # This is DG hmr:
+                DG_hr = int(DG_HMR_Reading)               
+                dghr_int = int(last_data.DG_HMR_Reading)
+                dg_hr = (DG_hr - dghr_int)
+                dghr = str(dg_hr)
+                if dghr[:1] == '-':
+                    hr_dg_sum = dghr[1:]
                 else:
-                    dghr = 0                
-                    DG_hr = 0
-                    dg_hr = 0
-                    dghr_int = 0
-                    DG_hr = int(DG_HMR_Reading)               
-                    dghr_int = int(last_data.DG_HMR_Reading)
-                    dg_hr = DG_hr - dghr_int
-                    dghr = str(dg_hr)
+                    hr_dg_sum = dghr
 
                 # This is CPH:
-                dieselhmrdiv = 0
                 minus = 0
-                lst_d_b = 0
-                current_d_b = 0
                 lst_d_b = int(last_data.Fuel_Qty_Filled)
-                current_d_b = int(Current_Diesel_Balance)
-                minus = current_d_b - lst_d_b
-                hmr = int(dghr)
+                current_d_b = int(last_data.Current_Diesel_Balance)
+                minus = (current_d_b - lst_d_b)
+                hmr = int(hr_dg_sum)
                 diesel = int(minus)
+                diesel_hmr_div = 0
                 if hmr == 0 or diesel == 0:
                     diesel_hmr_div = 0
                 else:
-                    diesel_hmr_div = diesel / hmr   
-                dieselhmrdiv = str(round(diesel_hmr_div))  
+                    diesel_hmr_div = (diesel / hmr)   
+                dieselhmrdiv = str(round(diesel_hmr_div, 2))  
+                if dieselhmrdiv[:1] == '-':
+                    cph_div = dieselhmrdiv[1:]
+                else:
+                    cph_div = dieselhmrdiv
 
                 # This is KWH:
-                lst_kwh_mtr = 0
+                min_KWH_mtr = 0
                 lst_kwh_mtr = int(last_data.Current_EB_MTR_KWH)
-                present_mtr = 0
-                present_mtr = int(last_data.Current_EB_MTR_KWH)
-                minKWHmtr = 0
-                min_KWH_mtr = present_mtr - lst_kwh_mtr
+                present_mtr = int(Current_EB_MTR_KWH)
+                min_KWH_mtr = (present_mtr - lst_kwh_mtr)
                 minKWHmtr = str(min_KWH_mtr)
+                if minKWHmtr[:1] == '-':
+                    KWH_mtr = minKWHmtr[1:]
+                else:
+                    KWH_mtr = minKWHmtr
 
                 # This is CPH approve by CPH:
-                cph = 0
-                last_approve_cph = 0
-                cph = int(diesel_hmr_div)
+                last_cph_div = 0
                 lastcph_data = SiteFixed.objects.filter(global_id=glb_id).order_by('-global_id').first()
                 last_approve_cph = float(lastcph_data.last_month_approved_CPH)
-                last_cph_div = cph - last_approve_cph
-                cph_with_int = int(last_cph_div)
-                div_with_last_cph = cph_with_int / last_approve_cph
-                div_last_cph = str(round(div_with_last_cph))
+                last_cph_div = (diesel_hmr_div - last_approve_cph)
+                div_with_last_cph = 0
+                if last_approve_cph == 0 or last_cph_div == 0:
+                    div_with_last_cph = 0
+                else:
+                    div_with_last_cph = (last_cph_div / last_approve_cph)
+                div_last_cph = str(round(div_with_last_cph, 2))
+                if div_last_cph[:1] == '-':
+                    approved_cph_data = div_last_cph[1:]
+                else:
+                    approved_cph_data = div_last_cph
         
             reg = EnergyFuel(global_id=global_id,DG_Serial_Number=DG_Serial_Number,DG_HMR_Status=DG_HMR_Status,
             DG_HMR_Reading=DG_HMR_Reading,DG_PIU_Status=DG_PIU_Status,Current_DG_PIU_Reading=Current_DG_PIU_Reading,Diesel_Filling_Done=Diesel_Filling_Done,
@@ -246,7 +257,7 @@ class DieselFillingOrReadingViews(TemplateView):
             Tasks=tasks,Total_DC_Load=Total_DC_Load,Total_EB_KWH_Reading_from_all_Channels=Total_EB_KWH_Reading_from_all_Channels,
             Remarks=Remarks,FT_ID=FT_ID,FT_name=FT_name,FT_mobile_no=FT_mobile_no,Receipt_No=Receipt_No,Card_Number=Card_Number,
             Vehicle_Plate=Vehicle_Plate,Before_Fuel_CM_Photo=Before_Fuel_CM_Photo,After_Fuel_Filling_CM_Photo=After_Fuel_Filling_CM_Photo,
-            DG_Running_HRS=dghr, CPH_CPH_Comparison_With_Last_CPH=div_last_cph, CPH=dieselhmrdiv, EB_KWH=minKWHmtr)
+            DG_Running_HRS=hr_dg_sum, CPH_CPH_Comparison_With_Last_CPH=approved_cph_data, CPH=cph_div, EB_KWH=KWH_mtr)
 
             messages.success(request, 'Your data has been submitted successfully.')
 

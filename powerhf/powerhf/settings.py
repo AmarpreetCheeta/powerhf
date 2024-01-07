@@ -24,15 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m-4e8n^h@m(fh3^i@)ehlyg4%km9k#c6a*e6%d8$2a)79exa3l'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.16.1.40', '136.232.18.42']
+ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'app.Users'
 
 SESSION_COOKIE_AGE = 3600
-
-SECURE_SSL_REDIRECT = True
 
 
 # Application definition
@@ -49,7 +47,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -87,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'powerhf_pvtltd',
         'USER': 'postgres',
-        'PASSWORD': 'Powerhf@123',
+        'PASSWORD': 'Amarpreet',
         'HOST': 'localhost',
         'PORT': '5432',
     }
